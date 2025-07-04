@@ -45,3 +45,23 @@ class ImageResultViewSet(viewsets.ModelViewSet):
                 return Response({key: serializer.errors}, status=400)
 
         return Response(created, status=201)
+    
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        if not queryset.exists():
+            return Response(
+                {"detail": "No hay registros que coincidan con los filtros proporcionados."},
+                status=200
+            )
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def destroy(self, request, *args, **kwargs):
+        try:
+            instance = self.get_object()
+            instance.delete()
+            return Response({"detail": "El registro fue eliminado exitosamente."}, status=204)
+        except Exception:
+            return Response({"detail": "No se pudo eliminar el registro. ID no válido."}, status=404)
