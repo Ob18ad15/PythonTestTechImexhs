@@ -1,3 +1,4 @@
+from rest_framework.response import Response
 from rest_framework import serializers
 from .models import ImageResult, Device
 import numpy as np
@@ -10,14 +11,16 @@ class DeviceSerializer(serializers.ModelSerializer):
 
 class ImageResultSerializer(serializers.ModelSerializer):
     device_name = serializers.CharField(write_only=True)
-    
+    #data = serializers.ListField(child=serializers.CharField(), required=False)
+  
 
     class Meta:
         model = ImageResult
         fields = [
-            'image_result_id',      # el campo en el modelo
-            'device_name',
-            'device',
+            'id',                 # ID interno de Django (autoincremental)
+            'image_result_id',   # ID externo personalizado
+            'device_name',       # campo de entrada para nombre del dispositivo
+            'device',            # relación al modelo Device
             'data',
             'data_size',
             'average_before',
@@ -42,6 +45,8 @@ class ImageResultSerializer(serializers.ModelSerializer):
         return value
 
     def create(self, validated_data):
+        if 'data' not in validated_data:
+            raise serializers.ValidationError({"data": "Este campo es requerido al crear."})
         raw_data = validated_data.pop("data")
         device_name = validated_data.pop("device_name")
         image_id = validated_data["image_result_id"]

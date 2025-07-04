@@ -3,7 +3,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
-from .models import ImageResult
+from .models import  ImageResult
+from django.db import IntegrityError
+
 from .serializers import ImageResultSerializer
 import logging
 
@@ -65,3 +67,31 @@ class ImageResultViewSet(viewsets.ModelViewSet):
             return Response({"detail": "El registro fue eliminado exitosamente."}, status=204)
         except Exception:
             return Response({"detail": "No se pudo eliminar el registro. ID no válido."}, status=404)
+    
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+
+        # Actualizar image_result_id
+        new_result_id = request.data.get("id")
+        if new_result_id:
+            instance.image_result_id = new_result_id
+
+        # Actualizar nombre del dispositivo
+        new_device_name = request.data.get("device_name")
+        if new_device_name:
+            try:
+                instance.device.name = new_device_name
+                instance.device.save()
+            except IntegrityError:
+                return Response(
+                    {"detail": (
+                        f"No se pudo actualizar el nombre del dispositivo a '{new_device_name}' "
+                        "porque ya existe otro dispositivo registrado con ese nombre. "
+                        "Por favor, elige un nombre único."
+                    )
+},
+                    status=400
+                )
+
+        instance.save()
+        return Response({"detail": "Actualización realizada con éxito."}, status=200)
