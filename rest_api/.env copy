@@ -1,0 +1,10 @@
+#DB_NAME=your_database_name
+# Replace with your actual database name
+#DB_USER=postgres
+#DB_PASSWORD=your_password
+# Replace with your actual database password
+#DB_HOST=localhost
+#DEBUG=True
+#DB_PORT=5432
+#SECRET_KEY=your_secret_key
+# Replace with your actual secret key

@@ -1,0 +1,48 @@
+# Ignorar archivos compilados por Python
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+ENV/
+*.env
+
+# Environment variables
+.env
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+
+# Logs
+logs/
+*.log
+
+# SQLite database
+*.sqlite3
+db.sqlite3
+
+# Media files (si no los versionas)
+/media/
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# Mac/Linux hidden files
+.DS_Store
+Thumbs.db
+
+# Static and build artifacts
+/staticfiles/
+build/
+dist/
+
+# Coverage reports
+htmlcov/
+coverage.xml
+*.cover
