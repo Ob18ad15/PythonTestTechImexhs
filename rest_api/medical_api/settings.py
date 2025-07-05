@@ -11,19 +11,40 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config, UndefinedValueError 
+
+try:
+    SECRET_KEY = config('SECRET_KEY')
+
+    if len(SECRET_KEY) < 40:
+        raise ValueError("La clave secreta es demasiado corta.")
+except (UndefinedValueError, ValueError) as e:
+    raise RuntimeError(f"SECRET_KEY inválido: {e}")
+
+DEBUG = config('DEBUG', default=False, cast=bool)
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
+    }
+}
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-)c&p23w7o&p-v4&l*+$k-kd+rhfp$2x9p)pp%$=-g0m3re=!-e'
+#SECRET_KEY = 'django-insecure-)c&p23w7o&p-v4&l*+$k-kd+rhfp$2x9p)pp%$=-g0m3re=!-e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -82,17 +103,17 @@ WSGI_APPLICATION = 'medical_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        "NAME": "medical_api_db",
-        "USER": "postgres",
-        "PASSWORD": "Lascmh7*",
-        "HOST": "localhost",
-        "PORT": "5432",
+#DATABASES = {
+#    'default': {
+#       'ENGINE': 'django.db.backends.postgresql',
+#       "NAME": "",
+#       "USER": "postgres",
+#       "PASSWORD": "",
+#       "HOST": "localhost",
+#       "PORT": "5432",
 
-    }
-}
+#   }
+#}
 
 
 # Password validation
@@ -135,3 +156,43 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+import os
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "[{levelname}] {asctime} | {name}: {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "file": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "logs/api.log"),
+            "formatter": "verbose",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["file"],
+            "level": "INFO",
+            "propagate": True,
+        },
+        "django.request": {
+            "handlers": ["file"],
+            "level": "ERROR",
+            "propagate": False,
+        },
+        "api": {
+            "handlers": ["file"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
+}
+
+MIDDLEWARE.insert(0, "results.middleware.logging.APILogMiddleware")
