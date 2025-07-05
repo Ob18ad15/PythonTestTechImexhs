@@ -1,5 +1,5 @@
 
-# 🩺 TEST 3 API REST de Resultados de Imágenes Médicas
+# 🩺 API REST de Resultados de Imágenes Médicas
 
 Esta es una API RESTful desarrollada con Django + Django REST Framework para gestionar resultados de procesamiento de imágenes médicas usando PostgreSQL. La API acepta estructuras JSON, valida, normaliza y almacena los datos.
 
@@ -13,6 +13,7 @@ Esta es una API RESTful desarrollada con Django + Django REST Framework para ges
 - ✅ Cálculo de promedios antes y después de la normalización
 - ✅ Filtros avanzados por fechas, promedios y tamaño de datos
 - ✅ Configuración basada en variables de entorno (`.env`)
+- ✅ Soporte para Docker (opcional)
 
 ---
 
@@ -21,8 +22,8 @@ Esta es una API RESTful desarrollada con Django + Django REST Framework para ges
 ### 1. Clonar el repositorio
 
 ```bash
-git clone [text](https://github.com/Ob18ad15/PythonTestTechImexhs.git)
-cd rest_api/medical_api
+git clone https://github.com/tu_usuario/medical_api.git
+cd medical_api
 ```
 
 ### 2. Crear y activar entorno virtual
