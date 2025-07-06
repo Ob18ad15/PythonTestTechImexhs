@@ -1,0 +1,28 @@
+<div class="overflow-x-auto bg-white border rounded shadow-sm p-4">
+  <h3 class="text-lg font-semibold mb-4 text-gray-700">Resultados anteriores</h3>
+
+  <!-- Si hay resultados -->
+  <table class="min-w-full text-sm text-left text-gray-600">
+    <thead class="bg-gray-100 border-b">
+      <tr>
+        <th class="px-4 py-2">#</th>
+        <th class="px-4 py-2">Puntos totales (n)</th>
+        <th class="px-4 py-2">Puntos en mancha (ni)</th>
+        <th class="px-4 py-2">Área estimada</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let result of results">
+        <td class="px-4 py-2">{{ result.id }}</td>
+        <td class="px-4 py-2">{{ result.totalPoints }}</td>
+        <td class="px-4 py-2">{{ result.pointsInside }}</td>
+        <td class="px-4 py-2">{{ result.estimatedArea | number: '1.2-2' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Si no hay resultados -->
+  <div *ngIf="results.length === 0" class="mt-4 text-gray-500">
+    No hay cálculos registrados aún.
+  </div>
+</div>

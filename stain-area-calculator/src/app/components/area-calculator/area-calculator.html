@@ -1,0 +1,17 @@
+<div class="p-4 bg-white border rounded shadow-sm text-gray-700">
+  <button
+    (click)="calcular()"
+    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded shadow"
+  >
+    Calcular área
+  </button>
+
+  <div *ngIf="lastResult$ | async as result" class="mt-4 border-t pt-4">
+    <h3 class="text-md font-semibold mb-2">Resultado más reciente:</h3>
+    <ul class="list-disc list-inside text-sm">
+      <li><strong>Puntos totales (n):</strong> {{ result.totalPoints }}</li>
+      <li><strong>Puntos dentro (ni):</strong> {{ result.pointsInside }}</li>
+      <li><strong>Área estimada:</strong> {{ result.estimatedArea }} px²</li>
+    </ul>
+  </div>
+</div>

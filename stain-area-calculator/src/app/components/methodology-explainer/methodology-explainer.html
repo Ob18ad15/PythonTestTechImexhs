@@ -1,0 +1,17 @@
+<div class="bg-white border rounded shadow-sm p-6 text-gray-700 space-y-4">
+  <h3 class="text-xl font-semibold text-blue-700">🧠 Metodología de cálculo</h3>
+
+  <div class="transition duration-300">
+    <h4 class="text-lg font-medium">{{ steps[activeStep].title }}</h4>
+    <p class="mt-2 text-sm text-gray-600">{{ steps[activeStep].description }}</p>
+  </div>
+
+  <div class="flex justify-between mt-4">
+    <button (click)="prevStep()" class="bg-gray-200 hover:bg-gray-300 text-sm px-4 py-2 rounded">
+      ← Anterior
+    </button>
+    <button (click)="nextStep()" class="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded">
+      Siguiente →
+    </button>
+  </div>
+</div>

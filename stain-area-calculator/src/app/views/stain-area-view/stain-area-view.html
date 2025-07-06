@@ -1,0 +1,31 @@
+<mat-tab-group>
+  <!-- Tab 1: Metodología + Subida de imagen + cálculo -->
+  <mat-tab label="Estimación de área">
+    <div class="space-y-6 mt-4">
+
+      <!-- Componente que explica el método paso a paso -->
+      <app-methodology-explainer></app-methodology-explainer>
+
+      <!-- Componente para subir imagen binaria -->
+      <app-image-uploader (upload)="onImageUpload($event)"></app-image-uploader>
+
+
+
+      <!-- Componente para elegir cantidad de puntos -->
+      <app-point-slider (pointChange)="onPointChange($event)"></app-point-slider>
+
+      <!-- Componente para ejecutar cálculo -->
+      <app-area-calculator></app-area-calculator>
+    </div>
+  </mat-tab>
+
+  <!-- Tab 2: Historial de cálculos anteriores -->
+  <mat-tab label="Historial">
+    <div class="mt-4">
+      <ng-container *ngIf="stainService.results$ | async as results">
+        <app-results-table [results]="results"></app-results-table>
+      </ng-container>
+
+    </div>
+  </mat-tab>
+</mat-tab-group>
