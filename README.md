@@ -12,7 +12,7 @@ Este repositorio contiene el desarrollo de las pruebas técnicas para aplicar a 
 | 1    | Recursión y Colores                        | ✅ Terminado |
 | 2    | API REST para Resultados de Imágenes Médicas | ✅ Terminado |
 | 3    | Por implementar                            | 🚧 Pendiente |
-| 4    | Por implementar                            | 🚧 Pendiente |
+| 4    | Stain Area Calculator Image                | ✅ Terminado |
 
 ---
 
@@ -153,5 +153,40 @@ Todos los campos soportan los siguientes sufijos:
 - `.env` está excluido en `.gitignore`
 
 ---
+
+
+# Test Stain Area Calculator – Angular Image Analyzer
+
+Este proyecto es una aplicación web desarrollada con Angular que permite analizar imágenes binarias para calcular el área de una mancha (stain). Está diseñada como parte de una prueba técnica, y demuestra el uso de componentes standalone, Tailwind CSS, Angular Material y técnicas modernas como zoneless architecture y SSR (en configuración avanzada).
+
+## 🚀 Características
+
+- 📷 Carga y previsualización de imágenes binarias.
+- 🧮 Cálculo del área de la mancha en píxeles.
+- 🎯 Arquitectura modular y componentes standalone.
+- 🎨 Estilización moderna con Tailwind CSS + Angular Material.
+- ⚙️ Preparado para SSR y zoneless rendering (opcional).
+- 💾 Emisión del objeto `HTMLImageElement` para procesamiento externo.
+
+
+## 🧪 Instalación y ejecución
+
+```bash
+git clone https://github.com/Ob18ad15/PythonTestTechImexhs.git
+- Ingresa al folder del proyecto
+cd stain-area-calculator
+npm install
+ng serve
+
+Dependencias
+
+- 🎯 Angular ^17.x
+- 🎯 TailwindCss 3.4.17
+- 🎯 Angular Material 20.0.5
+- 🎯 @Tailwind postcss 8.5.6
+- 🎯 Autoprefixer "^10.4.21",
+
+Comando para instalar Tailwind npm install -D tailwindcss@^3 postcss autoprefixer
+
 
 
