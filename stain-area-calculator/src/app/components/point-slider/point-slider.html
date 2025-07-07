@@ -1,0 +1,21 @@
+<div class="p-4 bg-white border rounded shadow-sm">
+  <!-- Etiqueta del slider -->
+  <label class="block mb-2 text-sm font-medium text-gray-700">
+    Selecciona la cantidad de puntos aleatorios
+  </label>
+
+  <!-- Slider con ngModel para enlace bidireccional -->
+  <input
+    type="range"
+    min="100"
+    max="10000"
+    [(ngModel)]="pointCount"
+    (change)="onSliderChange()"
+    class="w-full accent-blue-600"
+  />
+
+  <!-- Muestra el valor actual debajo del slider -->
+  <p class="mt-2 text-sm text-gray-600">
+    Cantidad actual: <strong>{{ pointCount }}</strong>
+  </p>
+</div>

@@ -1,0 +1,10 @@
+<div class="p-4 border border-gray-300 rounded bg-white shadow-sm">
+  <h2 class="text-lg font-semibold mb-2">Sube una imagen binaria</h2>
+
+<input type="file" accept="image/*" (change)="handleFile($event)" />
+
+  <div  *ngIf="fileLoaded"  class="mt-2 text-green-600">
+    ✅ Archivo cargado: {{ fileName }}
+
+  </div>
+</div>
